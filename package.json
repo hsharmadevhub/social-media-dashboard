@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/hsharmadevhub/social-media-dashboard#readme",
   "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
     "@types/node": "^24.10.1",
     "nodemon": "^3.1.11",
     "ts-node": "^10.9.2",
@@ -29,6 +30,7 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "mongoose": "^8.20.0"
   }
 }

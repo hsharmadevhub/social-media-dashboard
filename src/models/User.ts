@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import bcrypt from "bcrypt";
 
 const userSchema = new mongoose.Schema({
     username: {
@@ -47,5 +48,10 @@ const userSchema = new mongoose.Schema({
         ]
     }
 });
+
+userSchema.methods.encryptPassword = async (password: string): Promise<string> => {
+    const salt = await bcrypt.genSalt(10);
+    return await bcrypt.hash(password, salt);
+};
 
 export default mongoose.model('User', userSchema);
