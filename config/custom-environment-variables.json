@@ -1,0 +1,4 @@
+{
+    "jwtSecretKey": "JWT_SECRET",
+    "mongoConnectionStr": "MONGO_CONNECTION_STR"
+}

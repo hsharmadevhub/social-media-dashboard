@@ -2,12 +2,11 @@
   "name": "social-media-dashboard",
   "version": "1.0.0",
   "description": "",
-  "main": "src/startup/index.js",
+  "main": "dist/startup/app.js",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only src/startup/index.ts",
-    "build": "tsc",
-    "start": "node dist/startup/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "NODE_ENV=development tsx watch src/startup/app.ts",
+    "start": "node --loader tsx dist/startup/app.js",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -23,20 +22,24 @@
   "homepage": "https://github.com/hsharmadevhub/social-media-dashboard#readme",
   "devDependencies": {
     "@types/bcrypt": "^6.0.0",
+    "@types/config": "^3.3.5",
     "@types/express": "^5.0.5",
     "@types/express-session": "^1.18.2",
     "@types/jsonwebtoken": "^9.0.10",
+    "@types/morgan": "^1.9.10",
     "@types/node": "^24.10.1",
-    "nodemon": "^3.1.11",
-    "ts-node": "^10.9.2",
-    "ts-node-dev": "^2.0.0",
+    "tsx": "^4.20.6",
     "typescript": "^5.9.3"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
     "config": "^4.1.1",
     "express": "^5.1.0",
+    "express-session": "^1.18.2",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.20.0"
+    "mongoose": "^8.20.0",
+    "morgan": "^1.10.1",
+    "winston": "^3.18.3",
+    "zod": "^4.1.13"
   }
 }
