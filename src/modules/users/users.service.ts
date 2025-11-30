@@ -47,7 +47,9 @@ export async function login(body: LoginParams): Promise<string> {
   debug("matched user:", JSON.stringify(matchingUser));
 
   // Compare passwords
-  const isPasswordValid = bcrypt.compare(body.password, matchingUser.password);
+  const isPasswordValid = await bcrypt.compare(body.password, matchingUser.password);
+  debug("isPasswordValid:", isPasswordValid);
+
   if (!isPasswordValid) {
     throw new BadRequestError("invalid credentials");
   }
@@ -55,8 +57,9 @@ export async function login(body: LoginParams): Promise<string> {
   // Return JWT
   const token = jwt.sign(
     {
-      id: matchingUser._id,
+      userId: matchingUser._id,
       username: matchingUser.username,
+      email: matchingUser.email,
     },
     config.get("jwtSecretKey")
   );
