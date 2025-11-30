@@ -1,4 +1,5 @@
 {
-    "jwtSecretKey": "JWT_SECRET",
-    "mongoConnectionStr": "MONGO_CONNECTION_STR"
+  "jwtSecretKey": "JWT_SECRET",
+  "mongoConnectionStr": "MONGO_CONNECTION_STR",
+  "debugNamespace": "DEBUG"
 }

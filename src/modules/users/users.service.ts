@@ -8,6 +8,9 @@ import type {
   RegisterUserParams,
 } from "./validators/users.zod.js";
 import type { HydratedDocument } from "mongoose";
+import createDebug from "debug";
+
+const debug = createDebug("app:users:service");
 
 const encryptPassword = async (password: string): Promise<string> => {
   return await bcrypt.hash(password, 10);
@@ -29,6 +32,7 @@ export async function createUser(
   const createdUser = new User(body);
   await createdUser.save();
 
+  debug(JSON.stringify(createdUser));
   return createdUser;
 }
 
@@ -40,6 +44,7 @@ export async function login(body: LoginParams): Promise<string> {
   if (!matchingUser) {
     throw new NotFoundError("invalid credentials");
   }
+  debug("matched user:", JSON.stringify(matchingUser));
 
   // Compare passwords
   const isPasswordValid = bcrypt.compare(body.password, matchingUser.password);
@@ -48,11 +53,14 @@ export async function login(body: LoginParams): Promise<string> {
   }
 
   // Return JWT
-  return jwt.sign(
+  const token = jwt.sign(
     {
       id: matchingUser._id,
       username: matchingUser.username,
     },
     config.get("jwtSecretKey")
   );
+
+  debug("generated token:", JSON.stringify(token));
+  return token;
 }

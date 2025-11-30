@@ -5,6 +5,9 @@ import config from "config";
 import registerDb from "./registerDb.js";
 import registerLogging from "../core/logging/morgan.logger.js";
 import logger from "../core/logging/winston.logger.js";
+import registerDebugging from "./registerDebugging.js";
+
+registerDebugging();
 
 const app = express();
 app.use(express.json());
@@ -21,4 +24,4 @@ registerDb();
 registerRoutes(app);
 
 const PORT = 5001;
-app.listen(PORT, () => logger.info("Server is running"));
+app.listen(PORT, () => logger.info("server is running"));

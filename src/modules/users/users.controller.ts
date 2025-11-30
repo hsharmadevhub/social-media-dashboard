@@ -5,13 +5,18 @@ import type {
   RegisterUserParams,
 } from "./validators/users.zod.js";
 import { BadRequestError } from "../../core/errors/HttpError.js";
+import createDebug from "debug";
+
+const debug = createDebug("app:users:controller");
 
 export async function registerUserController(
   req: Request<{}, {}, RegisterUserParams>,
   res: Response,
   next: NextFunction
 ) {
+  debug("request body: ", JSON.stringify(req.body));
   const user = await createUser(req.body);
+  debug("created user: ", JSON.stringify(user));
 
   return res
     .status(201)

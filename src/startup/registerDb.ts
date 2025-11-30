@@ -5,4 +5,4 @@ import logger from "../core/logging/winston.logger.js";
 export default () =>
   mongoose
     .connect(config.get("mongoConnectionStr"), { dbName: "SocialDB" })
-    .then(() => logger.info("Connected to DB"));
+    .then(() => logger.info("connected to DB"));

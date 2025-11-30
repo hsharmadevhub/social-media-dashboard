@@ -1,5 +1,6 @@
 {
-    "name": "Development Environment",
-    "jwtSecretKey": "dev-secret-key-123",
-    "mongoConnectionStr": "mongodb://127.0.0.1:27017"
+  "name": "Development Environment",
+  "jwtSecretKey": "dev-secret-key-123",
+  "mongoConnectionStr": "mongodb://127.0.0.1:27017",
+  "debugNamespace": "app:*"
 }
