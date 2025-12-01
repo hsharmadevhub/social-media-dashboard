@@ -1,30 +1,34 @@
 import zod from "zod";
-import { MONGO_OBJECT_ID_REGEX } from "./shared.js";
 
-export const GetPostsSchema = zod.object({
-  userId: zod.string().optional(),
-});
+const MONGO_OBJECT_ID_REGEX = /^[0-9a-fA-F]{24}$/;
 
 export const AddPostSchema = zod.object({
   post: zod.string(),
-  userId: zod.string().regex(MONGO_OBJECT_ID_REGEX, "invalid userId"),
 });
 
-export const GetPostSchema = zod.object({
-  postId: zod.string().regex(MONGO_OBJECT_ID_REGEX, "invalid postId"),
+export const GetPostSchemaRouteParams = zod.object({
+  id: zod.string().regex(MONGO_OBJECT_ID_REGEX, "invalid objectId"),
 });
 
-export const UpdatePostSchema = zod.object({
-  postId: zod.string().regex(MONGO_OBJECT_ID_REGEX, "invalid postId"),
+export const UpdatePostSchemaRouteParams = zod.object({
+  id: zod.string().regex(MONGO_OBJECT_ID_REGEX, "invalid objectId"),
+});
+
+export const UpdatePostSchemaBodyParams = zod.object({
   post: zod.string(),
 });
 
-export const DeletePostSchema = zod.object({
-  postId: zod.string().regex(MONGO_OBJECT_ID_REGEX, "invalid postId"),
+export const DeletePostSchemaRouteParams = zod.object({
+  id: zod.string().regex(MONGO_OBJECT_ID_REGEX, "invalid objectId"),
 });
 
-export type GetPostsParams = zod.infer<typeof GetPostsSchema>;
-export type AddPostsParams = zod.infer<typeof AddPostSchema>;
-export type GetPostParams = zod.infer<typeof GetPostSchema>;
-export type UpdatePostParams = zod.infer<typeof UpdatePostSchema>;
-export type DeletePostParams = zod.infer<typeof DeletePostSchema>;
+export type AddPostParams = zod.infer<typeof AddPostSchema>;
+export type GetPostRouteParams = zod.infer<typeof GetPostSchemaRouteParams>;
+export type UpdatePostRouteParams = zod.infer<
+  typeof UpdatePostSchemaRouteParams
+>;
+export type UpdatePostBodyParams = zod.infer<typeof UpdatePostSchemaBodyParams>;
+export type UpdatePostParams = UpdatePostRouteParams & UpdatePostBodyParams;
+export type DeletePostRouteParams = zod.infer<
+  typeof DeletePostSchemaRouteParams
+>;

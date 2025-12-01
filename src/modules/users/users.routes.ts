@@ -7,9 +7,9 @@ const userRoutes = express.Router();
 
 userRoutes.post(
   "/register",
-  validate(RegisterUserSchema),
+  validate({ body: RegisterUserSchema }),
   registerUserController
 );
-userRoutes.post("/login", validate(LoginSchema), loginController);
+userRoutes.post("/login", validate({ body: LoginSchema }), loginController);
 
 export default userRoutes;

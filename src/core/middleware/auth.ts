@@ -12,19 +12,19 @@ export default function authenticateToken(
   res: Response,
   next: NextFunction
 ) {
-  const token = req.session.token;
+  const token = req.session?.token;
   const secretKey: string = config.get("jwtSecretKey");
 
-  debug("validating token:", req.session.token);
+  debug("validating token:", req.session?.token);
 
-  if (!token) return new UnauthorizedError();
+  if (!token) throw new UnauthorizedError();
 
   try {
     const decodedUser = jwt.verify(token, secretKey) as UserData;
     req.user = decodedUser;
-    debug("decoded user:", decodedUser);
+    debug("decoded user:", JSON.stringify(decodedUser));
     next();
   } catch (err) {
-    return new UnauthorizedError("Invalid token");
+    throw new UnauthorizedError("Invalid token");
   }
 }

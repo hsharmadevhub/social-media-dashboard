@@ -1,12 +1,14 @@
 import "express";
+import mongoose from "mongoose";
 
 export interface UserData {
-    username: string;
-    email: string;
-};
+  userId: string;
+  username: string;
+  email: string;
+}
 
 declare module "express-serve-static-core" {
-    interface Request {
-        user?: UserData
-    }
+  interface Request {
+    user: UserData;
+  }
 }

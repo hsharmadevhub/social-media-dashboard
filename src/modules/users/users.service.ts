@@ -47,7 +47,10 @@ export async function login(body: LoginParams): Promise<string> {
   debug("matched user:", JSON.stringify(matchingUser));
 
   // Compare passwords
-  const isPasswordValid = await bcrypt.compare(body.password, matchingUser.password);
+  const isPasswordValid = await bcrypt.compare(
+    body.password,
+    matchingUser.password
+  );
   debug("isPasswordValid:", isPasswordValid);
 
   if (!isPasswordValid) {

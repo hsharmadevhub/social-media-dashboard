@@ -1,4 +1,4 @@
-import type { NextFunction, Request, Response } from "express";
+import type { Request, Response } from "express";
 import { createUser, login } from "./users.service.js";
 import type {
   LoginParams,
@@ -11,12 +11,10 @@ const debug = createDebug("app:users:controller");
 
 export async function registerUserController(
   req: Request<{}, {}, RegisterUserParams>,
-  res: Response,
-  next: NextFunction
+  res: Response
 ) {
-  debug("request body: ", JSON.stringify(req.body));
+  debug("request body:", JSON.stringify(req.body));
   const user = await createUser(req.body);
-  debug("created user: ", JSON.stringify(user));
 
   return res
     .status(201)
@@ -25,9 +23,9 @@ export async function registerUserController(
 
 export async function loginController(
   req: Request<{}, {}, LoginParams>,
-  res: Response,
-  next: NextFunction
+  res: Response
 ) {
+  debug("request body:", JSON.stringify(req.body));
   if (req.session?.token) {
     throw new BadRequestError("user already logged in");
   }
