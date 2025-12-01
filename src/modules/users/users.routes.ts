@@ -1,5 +1,5 @@
 import express from "express";
-import { loginController, registerUserController } from "./users.controller.js";
+import { loginController, logoutController, registerUserController } from "./users.controller.js";
 import { RegisterUserSchema, LoginSchema } from "./validators/users.zod.js";
 import validate from "../../core/middleware/validate.js";
 
@@ -11,5 +11,6 @@ userRoutes.post(
   registerUserController
 );
 userRoutes.post("/login", validate({ body: LoginSchema }), loginController);
+userRoutes.post("/logout", logoutController);
 
 export default userRoutes;

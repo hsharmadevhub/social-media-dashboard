@@ -37,3 +37,9 @@ export async function loginController(
     .status(200)
     .send({ message: `user ${req.body.username} logged in successfully` });
 }
+
+export async function logoutController(req: Request, res: Response) {
+  req.session.destroy(() => {
+    return res.redirect("/login");
+  });
+}
